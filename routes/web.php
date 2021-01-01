@@ -21,6 +21,8 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [VocabularyController::class, 'dashboard'])->name('dashboard');
     Route::post('/add_vocabulary', [VocabularyController::class, 'createVocabulary']);
+    Route::put('/edit/vocabulary', [VocabularyController::class, 'editVocabulary']);
+    Route::delete('delete/vocabulary/{id}', [VocabularyController::class, 'deleteVocabulary']);
 });
 
 require __DIR__.'/auth.php';
