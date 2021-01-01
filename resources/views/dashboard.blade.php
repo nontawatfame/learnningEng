@@ -57,10 +57,10 @@
                                                     </li>
                                                     <a href="#" class="list-group-item list-group-item-action"><i class="fas fa-plus" style="font-size: 15px;color:#696969"></i></a>
                                                 </ul>
-                                            </div>
-                                            <div class="pb-4 mr-8" style="float: right">
-                                                <button class="btn btn-primary"><i class="far fa-edit mr-1"></i> edit</button>
-                                                <button class="btn btn-danger"><i class="far fa-trash-alt"></i> delete</button>
+                                                <div class="pb-4 mr-8 mt-3">
+                                                    <button class="btn btn-primary"><i class="far fa-edit mr-1"></i> edit</button>
+                                                    <button class="btn btn-danger"><i class="far fa-trash-alt"></i> delete</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
