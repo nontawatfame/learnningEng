@@ -25,7 +25,7 @@ class VocabularyController extends Controller
             $vocabulary = Vocabulary::find($request->id);
             $vocabulary->vocabulary_name = $request->vocabulary_name;
             $vocabulary->save();
-            return $request->all();
+            return $vocabulary;
         } catch (Exception $e) {
             return $e->getMessage();
         }
@@ -35,6 +35,7 @@ class VocabularyController extends Controller
         try {
             Vocabulary::destroy($id);
             $json['success'] = 'Delete success';
+            $json['id'] = $id;
             return $json;
         } catch (Exception $e) {
             return $e->getMessage();
