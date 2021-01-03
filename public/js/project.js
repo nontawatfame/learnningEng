@@ -6,6 +6,12 @@ var modalDeleteVocabulary = new bootstrap.Modal(document.getElementById('delete_
     keyboard: false
 })
 
+var modalCreateList = new bootstrap.Modal(document.getElementById('modal_create_list'), {
+    keyboard: false
+})
+
+let csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+
 function modalEditVocabulary(id, data) {
 
     document.getElementById('edit_vocabulary_id').value = id
@@ -14,7 +20,6 @@ function modalEditVocabulary(id, data) {
 }
 
 function submitEditVocabulary() {
-    let csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     let id = document.getElementById('edit_vocabulary_id').value
     let vocabularyName =  document.getElementById('edit_vocabulary_name').value
     fetch('/edit/vocabulary', {
@@ -56,7 +61,6 @@ function deleteVocabulary(vocabulary) {
 }
 
 function deleteVocabularyId(id) {
-    let csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content')
     fetch(`/delete/vocabulary/${id}`,{
         headers: {
             "Content-Type": "application/json",
@@ -77,3 +81,14 @@ function deleteVocabularyId(id) {
     });
 }
 
+function openModalCreateList(vocabulary) {
+    console.log('ok')
+    document.getElementById('create_list_translation').setAttribute('onclick',`createListTranslation(${vocabulary.id})`)
+    modalCreateList.show()
+
+
+}
+
+function createListTranslation(id) {
+    console.log('ok', id)
+}
