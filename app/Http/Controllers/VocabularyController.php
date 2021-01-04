@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Translation;
 use App\Models\Vocabulary;
 use Exception;
 use Illuminate\Http\Request;
@@ -37,6 +38,18 @@ class VocabularyController extends Controller
             $json['success'] = 'Delete success';
             $json['id'] = $id;
             return $json;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function createTranslation(Request $request) {
+        try {
+            $translation = new Translation;
+            $translation->name = $request->translation;
+            $translation->vocabulary_id = $request->id;
+            $json['success'] = 'Create translation success';
+            $json['id'] = $request->id;
         } catch (Exception $e) {
             return $e->getMessage();
         }

@@ -91,4 +91,29 @@ function openModalCreateList(vocabulary) {
 
 function createListTranslation(id) {
     console.log('ok', id)
+    let translation = document.getElementById('translation_name').value
+    console.log(translation)
+    fetch('/create_translation',{
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrf
+          },
+        method: 'post',
+        body:
+            JSON.stringify({
+                'id': id,
+                'translation': translation
+            })
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+        // console.log(res.id)
+        // modalDeleteVocabulary.hide()
+        // Swal.fire({
+        //     icon: 'success',
+        //     title: res.success,
+        // })
+        // document.getElementById(`accordion-item-${res.id}`).remove()
+    });
 }

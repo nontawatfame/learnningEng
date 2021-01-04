@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\VocabularyController;
+use App\Models\Vocabulary;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/add_vocabulary', [VocabularyController::class, 'createVocabulary']);
     Route::put('/edit/vocabulary', [VocabularyController::class, 'editVocabulary']);
     Route::delete('delete/vocabulary/{id}', [VocabularyController::class, 'deleteVocabulary']);
+    Route::post('/create_translation', [VocabularyController::class, 'createTranslation']);
 });
 
 require __DIR__.'/auth.php';
