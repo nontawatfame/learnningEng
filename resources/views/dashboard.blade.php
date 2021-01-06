@@ -42,9 +42,15 @@
                                             <div id="flush-collapseOne{{$i}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne{{$i}}" data-bs-parent="#accordionFlushExample">
                                                 <div class="accordion-body">
                                                     <div id="list-vocabulary-id{{$vocabulary->id}}">
-                                                        <li class="list-group-item">
-                                                            <input value="Cras justo odio" style="width: 80%"><span style="float:right"><i class="far fa-edit mr-1"></i><i class="far fa-trash-alt"></i></span>
-                                                        </li>
+                                                        @if($vocabulary->translation->count() === 0)
+                                                            <div id="hr" style="border-bottom: 1px solid #e8e7e7;"></div>
+                                                        @else
+                                                            @foreach($vocabulary->translation as $translation)
+                                                                <li class="list-group-item" id="translation_{{$translation->id}}">
+                                                                    {{$translation->name}}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,{{$translation}})"></i></span>
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
                                                     </div>
                                                     <p class="list-group-item-add list-group-item-action" onclick="openModalCreateList({{$vocabulary}})"><i class="fas fa-plus" style="font-size: 15px;color:#696969"></i></p>
                                                     <div class="pb-4 mr-8 mt-3">
@@ -84,7 +90,7 @@
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Delete vocabulary</h5>
+                                  <h5 class="modal-title" id="title_delete_vocabulary">Delete vocabulary</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body" id="body_delete_vocabulary">

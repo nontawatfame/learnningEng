@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Translation extends Model
 {
     use HasFactory;
+
+    public function vocabulary() {
+        return $this->belongsTo(Vocabulary::class,'id','vocabulary_id');
+    }
 }

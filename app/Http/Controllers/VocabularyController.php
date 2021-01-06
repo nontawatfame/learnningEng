@@ -35,6 +35,10 @@ class VocabularyController extends Controller
     public function deleteVocabulary($id) {
         try {
             Vocabulary::destroy($id);
+            $translations = Translation::where('vocabulary_id','=', $id)->get();
+            foreach($translations as $tran) {
+                $tran->delete();
+            }
             $json['success'] = 'Delete success';
             $json['id'] = $id;
             return $json;
@@ -48,8 +52,22 @@ class VocabularyController extends Controller
             $translation = new Translation;
             $translation->name = $request->translation;
             $translation->vocabulary_id = $request->id;
+            $translation->save();
             $json['success'] = 'Create translation success';
+            $json['data'] = $translation;
             $json['id'] = $request->id;
+            return $json;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function deleteTranslation($id) {
+        try {
+            Translation::destroy($id);
+            $json['success'] = 'Delete success';
+            $json['id'] = $id;
+            return $json;
         } catch (Exception $e) {
             return $e->getMessage();
         }

@@ -11,3 +11,15 @@
 .list-group-item-add:hover {
     cursor: pointer;
 }
+
+.cursor-pointer-fa {
+    cursor: pointer;
+}
+
+.cursor-pointer-fa:hover {
+    color: rgb(138, 138, 138);
+}
+
+.cursor-pointer-fa:active {
+    color: rgb(90, 57, 52)
+}

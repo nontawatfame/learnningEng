@@ -108,12 +108,52 @@ function createListTranslation(id) {
     .then(res => res.json())
     .then(res => {
         console.log(res)
-        // console.log(res.id)
-        // modalDeleteVocabulary.hide()
-        // Swal.fire({
-        //     icon: 'success',
-        //     title: res.success,
-        // })
-        // document.getElementById(`accordion-item-${res.id}`).remove()
+        if (res.success) {
+            let trans_li = `
+                <li class="list-group-item">
+                    ${res.data.name}<span style="float:right"><i class="far fa-edit mr-1"></i><i class="far fa-trash-alt"></i></span>
+                </li>
+            `
+            console.log(trans_li)
+            document.getElementById(`list-vocabulary-id${res.id}`).insertAdjacentHTML('beforeend',trans_li)
+
+            Swal.fire({
+                icon: 'success',
+                title: res.success,
+            })
+            document.getElementById('translation_name').value = ''
+            modalCreateList.hide()
+        }
     });
+}
+
+function modalDeletTranslation(el, translation) {
+    console.log(el,translation.id)
+    document.getElementById('title_delete_vocabulary').innerText = 'Delete translation'
+    document.getElementById('body_delete_vocabulary').innerText = `Delete translation ${translation.name} ?`
+    document.getElementById('delete_vocabulary_btn').setAttribute('onclick',`deleteTranslation(${translation.id})`)
+    modalDeleteVocabulary.show()
+}
+
+function deleteTranslation(id) {
+    console.log(id)
+    fetch(`/delete/translation/${id}`,{
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrf
+        },
+        method: 'delete',
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+        if (res.success) {
+            document.getElementById(`translation_${res.id}`).remove()
+            Swal.fire({
+                icon: 'success',
+                title: res.success,
+            })
+            modalDeleteVocabulary.hide()
+        }
+    })
 }
