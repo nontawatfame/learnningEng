@@ -84,6 +84,7 @@ function deleteVocabularyId(id) {
 function openModalCreateList(vocabulary) {
     console.log('ok')
     document.getElementById('create_list_translation').setAttribute('onclick',`createListTranslation(${vocabulary.id})`)
+    document.getElementById('translation_name').setAttribute('data-id-vocabulary', vocabulary.id)
     modalCreateList.show()
 
 
@@ -110,8 +111,8 @@ function createListTranslation(id) {
         console.log(res)
         if (res.success) {
             let trans_li = `
-                <li class="list-group-item">
-                    ${res.data.name}<span style="float:right"><i class="far fa-edit mr-1"></i><i class="far fa-trash-alt"></i></span>
+                <li class="list-group-item" id="translation_${res.data.id}">
+                    ${res.data.name}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,${res.data.id})"></i></span>
                 </li>
             `
             console.log(trans_li)
@@ -127,11 +128,12 @@ function createListTranslation(id) {
     });
 }
 
-function modalDeletTranslation(el, translation) {
-    console.log(el,translation.id)
+function modalDeletTranslation(el, id) {
+    console.log(el,id)
+    let translationName = document.getElementById(`translation_${id}`).innerText
     document.getElementById('title_delete_vocabulary').innerText = 'Delete translation'
-    document.getElementById('body_delete_vocabulary').innerText = `Delete translation ${translation.name} ?`
-    document.getElementById('delete_vocabulary_btn').setAttribute('onclick',`deleteTranslation(${translation.id})`)
+    document.getElementById('body_delete_vocabulary').innerText = `Delete translation ${translationName} ?`
+    document.getElementById('delete_vocabulary_btn').setAttribute('onclick',`deleteTranslation(${id})`)
     modalDeleteVocabulary.show()
 }
 
@@ -157,3 +159,10 @@ function deleteTranslation(id) {
         }
     })
 }
+
+document.getElementById('translation_name').addEventListener('keyup', (event) => {
+    if (event.which == 13 || event.keyCode == 13) {
+        let id = event.srcElement.getAttribute('data-id-vocabulary')
+        createListTranslation(id)
+    }
+})

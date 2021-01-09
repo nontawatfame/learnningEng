@@ -47,12 +47,12 @@
                                                         @else
                                                             @foreach($vocabulary->translation as $translation)
                                                                 <li class="list-group-item" id="translation_{{$translation->id}}">
-                                                                    {{$translation->name}}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,{{$translation}})"></i></span>
+                                                                    {{$translation->name}}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,{{$translation->id}})"></i></span>
                                                                 </li>
                                                             @endforeach
                                                         @endif
                                                     </div>
-                                                    <p class="list-group-item-add list-group-item-action" onclick="openModalCreateList({{$vocabulary}})"><i class="fas fa-plus" style="font-size: 15px;color:#696969"></i></p>
+                                                    <p class="list-group-item-add list-group-item-action" onclick="openModalCreateList({{$vocabulary}})" ><i class="fas fa-plus" style="font-size: 15px;color:#696969"></i></p>
                                                     <div class="pb-4 mr-8 mt-3">
                                                         <button class="btn btn-primary" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
                                                         <button class="btn btn-danger" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button>
