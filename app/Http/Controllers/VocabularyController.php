@@ -6,10 +6,26 @@ use App\Models\Translation;
 use App\Models\Vocabulary;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class VocabularyController extends Controller
 {
     public function createVocabulary(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'vocabulary_name' => 'required|unique:vocabularies|max:255',
+        ],
+        $messages = [
+            'vocabulary_name.unique' => 'This :attribute is repeated',
+        ],
+        [
+            'vocabulary_name' => 'vocabulary name'
+        ]);
+        // return $validator->errors()->get('vocabulary_name');
+        if ($validator->fails()) {
+            return redirect('/dashboard')
+            ->withErrors($validator)
+            ->withInput();
+        }
         Vocabulary::create([
             'vocabulary_name' => $request->vocabulary_name,
         ]);
@@ -67,6 +83,20 @@ class VocabularyController extends Controller
             Translation::destroy($id);
             $json['success'] = 'Delete success';
             $json['id'] = $id;
+            return $json;
+        } catch (Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+    public function editTranslation(Request $request, $id) {
+        try {
+            $translation = Translation::find($id);
+            $translation->name = $request->translation;
+            $translation->save();
+            $json['success'] = 'Edit translation success';
+            $json['data'] = $translation;
+            $json['id'] = $request->id;
             return $json;
         } catch (Exception $e) {
             return $e->getMessage();

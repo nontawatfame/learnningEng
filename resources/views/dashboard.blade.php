@@ -13,7 +13,7 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="exampleFormControlInput1" class="form-label">Vocabulary</label>
-                                <x-input id="vocabulary" class="block mt-1 w-full" type="text" name="vocabulary_name" :value="old('email')" required autofocus autocomplete="off"/>
+                                <x-input id="vocabulary" class="block mt-1 w-full" type="text" name="vocabulary_name" :value="old('vocabulary_name')" required autofocus autocomplete="off"/>
                             </div>
                             <x-button>add vocabulary</x-button>
                         </form>
@@ -47,7 +47,7 @@
                                                         @else
                                                             @foreach($vocabulary->translation as $translation)
                                                                 <li class="list-group-item" id="translation_{{$translation->id}}">
-                                                                    {{$translation->name}}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,{{$translation->id}})"></i></span>
+                                                                    {{$translation->name}}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa" onclick="modalEditTranslation(this,{{$translation->id}})"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,{{$translation->id}})"></i></span>
                                                                 </li>
                                                             @endforeach
                                                         @endif
@@ -109,4 +109,16 @@
             </div>
         </div>
     </div>
+    @if ($errors->any())
+        @section('script')
+            <script>
+                let error = `{{($errors->get('vocabulary_name')[0])}}`;
+                console.log(error)
+                Swal.fire({
+                    icon: 'error',
+                    title: error,
+                })
+            </script>
+        @endsection
+    @endif
 </x-app-layout>

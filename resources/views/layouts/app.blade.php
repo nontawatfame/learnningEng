@@ -46,5 +46,6 @@
         <script src="https://kit.fontawesome.com/632cf620c0.js" crossorigin="anonymous"></script>
         <script src="{{asset('/js/swal.js')}}"></script>
         <script src="{{asset('/js/project.js')}}"></script>
+        @yield('script')
     </body>
 </html>

@@ -82,7 +82,8 @@ function deleteVocabularyId(id) {
 }
 
 function openModalCreateList(vocabulary) {
-    console.log('ok')
+    document.getElementById('translation_title').innerText = 'Translation'
+    document.getElementById('translation_name').value = ''
     document.getElementById('create_list_translation').setAttribute('onclick',`createListTranslation(${vocabulary.id})`)
     document.getElementById('translation_name').setAttribute('data-id-vocabulary', vocabulary.id)
     modalCreateList.show()
@@ -129,7 +130,6 @@ function createListTranslation(id) {
 }
 
 function modalDeletTranslation(el, id) {
-    console.log(el,id)
     let translationName = document.getElementById(`translation_${id}`).innerText
     document.getElementById('title_delete_vocabulary').innerText = 'Delete translation'
     document.getElementById('body_delete_vocabulary').innerText = `Delete translation ${translationName} ?`
@@ -138,7 +138,6 @@ function modalDeletTranslation(el, id) {
 }
 
 function deleteTranslation(id) {
-    console.log(id)
     fetch(`/delete/translation/${id}`,{
         headers: {
             "Content-Type": "application/json",
@@ -148,7 +147,6 @@ function deleteTranslation(id) {
     })
     .then(res => res.json())
     .then(res => {
-        console.log(res)
         if (res.success) {
             document.getElementById(`translation_${res.id}`).remove()
             Swal.fire({
@@ -166,3 +164,40 @@ document.getElementById('translation_name').addEventListener('keyup', (event) =>
         createListTranslation(id)
     }
 })
+
+function modalEditTranslation(el, id) {
+    let translationName = document.getElementById(`translation_${id}`).innerText
+    document.getElementById('translation_title').innerText = 'Edit Translation'
+    document.getElementById('translation_name').value = translationName
+    document.getElementById('create_list_translation').setAttribute('onclick',`editListTranslation(${id})`)
+    document.getElementById('translation_name').setAttribute('data-id-vocabulary', id)
+    modalCreateList.show()
+}
+
+function editListTranslation(id) {
+    console.log(id)
+    let translationName = document.getElementById('translation_name').value
+    console.log(translationName)
+    fetch(`/edit_translation/${id}`, {
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrf
+        },
+        method: 'put',
+        body:
+            JSON.stringify({
+                'translation': translationName
+            })
+    }).then(res => res.json())
+    .then(res => {
+        console.log(res)
+        if (res.success) {
+            document.getElementById(`translation_${id}`).innerText = res.data.name
+            Swal.fire({
+                icon: 'success',
+                title: res.success,
+            })
+            modalCreateList.hide()
+        }
+    })
+}

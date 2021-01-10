@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('delete/vocabulary/{id}', [VocabularyController::class, 'deleteVocabulary']);
     Route::post('/create_translation', [VocabularyController::class, 'createTranslation']);
     Route::delete('/delete/translation/{id}', [VocabularyController::class, 'deleteTranslation']);
+    Route::put('/edit_translation/{id}', [VocabularyController::class, 'editTranslation']);
 });
 
 require __DIR__.'/auth.php';
