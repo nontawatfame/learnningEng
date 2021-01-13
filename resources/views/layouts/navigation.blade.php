@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link href="/random-eng" :active="request()->is('random-eng')">
+                        {{ __('Random-Eng') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -67,6 +70,7 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

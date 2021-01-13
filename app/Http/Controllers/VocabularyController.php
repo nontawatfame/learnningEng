@@ -34,7 +34,13 @@ class VocabularyController extends Controller
 
     public function dashboard() {
         $vocabulary = Vocabulary::orderByDesc('id')->get();
+        // $vocabulary = Vocabulary::inRandomOrder()->limit(5)->get();
         return view('dashboard',['vocabularys' => $vocabulary]);
+    }
+
+    public function randomVocabulary() {
+        $vocabulary = Vocabulary::inRandomOrder()->limit(10)->get();
+        return view('random',['vocabularys' => $vocabulary]);
     }
 
     public function editVocabulary(Request $request) {

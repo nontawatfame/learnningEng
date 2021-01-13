@@ -9,26 +9,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container">
-                        <form method="POST" action="/add_vocabulary">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Vocabulary</label>
-                                <x-input id="vocabulary" class="block mt-1 w-full" type="text" name="vocabulary_name" :value="old('vocabulary_name')" required autofocus autocomplete="off"/>
-                            </div>
-                            <x-button>add vocabulary</x-button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="pt-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="container">
-                        <H1>All english vocabulary: <span class="all-eng">{{$vocabularys->count()}}</span></H1>
+                            <x-button>Random vocabulary</x-button>
                     </div>
                 </div>
             </div>
