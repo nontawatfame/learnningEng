@@ -50,6 +50,9 @@ function submitEditVocabulary() {
             icon: 'error',
             title: error,
         })
+    })
+    .catch((error) => {
+        console.error('Error:', error);
     });
 }
 
@@ -78,6 +81,9 @@ function deleteVocabularyId(id) {
             title: res.success,
         })
         document.getElementById(`accordion-item-${res.id}`).remove()
+    })
+    .catch((error) => {
+        console.error('Error:', error);
     });
 }
 
@@ -113,7 +119,7 @@ function createListTranslation(id) {
         if (res.success) {
             let trans_li = `
                 <li class="list-group-item" id="translation_${res.data.id}">
-                    ${res.data.name}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,${res.data.id})"></i></span>
+                    ${res.data.name}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa" onclick="modalEditTranslation(this,${res.data.id})"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,${res.data.id})"></i></span>
                 </li>
             `
             console.log(trans_li)
@@ -126,6 +132,9 @@ function createListTranslation(id) {
             document.getElementById('translation_name').value = ''
             modalCreateList.hide()
         }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
     });
 }
 
@@ -156,6 +165,9 @@ function deleteTranslation(id) {
             modalDeleteVocabulary.hide()
         }
     })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 document.getElementById('translation_name').addEventListener('keyup', (event) => {
@@ -192,7 +204,10 @@ function editListTranslation(id) {
     .then(res => {
         console.log(res)
         if (res.success) {
-            document.getElementById(`translation_${id}`).innerText = res.data.name
+            let trans_li = `
+                ${res.data.name}<span style="float:right"><i class="far fa-edit mr-1 cursor-pointer-fa" onclick="modalEditTranslation(this,${res.data.id})"></i><i class="far fa-trash-alt cursor-pointer-fa" onclick="modalDeletTranslation(this,${res.data.id})"></i></span>
+            `
+            document.getElementById(`translation_${id}`).innerHTML = trans_li
             Swal.fire({
                 icon: 'success',
                 title: res.success,
@@ -200,4 +215,61 @@ function editListTranslation(id) {
             modalCreateList.hide()
         }
     })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function incrementKnow(id) {
+    console.log(id)
+    fetch(`/incrementKnow`, {
+        headers: {
+            "Content-Type": 'application/json',
+            "X-CSRF-Token": csrf
+        },
+        method: 'post',
+        body:
+            JSON.stringify({
+                'id':id
+            })
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+        Swal.fire({
+            icon: 'success',
+            title: 'Know',
+        })
+        document.getElementById(`accordion-item-${res.vocabulary_id}`).remove()
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function incrementDontKnow(id) {
+    console.log(id)
+    fetch(`/incrementDontKnow`, {
+        headers: {
+            "Content-Type": 'application/json',
+            "X-CSRF-Token": csrf
+        },
+        method: 'post',
+        body:
+            JSON.stringify({
+                'id':id
+            })
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+        Swal.fire({
+            icon: 'question',
+            title: `Don't know`,
+        })
+        document.getElementById(`accordion-item-${res.vocabulary_id}`).remove()
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+      });
 }

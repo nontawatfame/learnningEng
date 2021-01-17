@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OurController;
 use App\Http\Controllers\VocabularyController;
 use App\Models\Vocabulary;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,8 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/delete/translation/{id}', [VocabularyController::class, 'deleteTranslation']);
     Route::put('/edit_translation/{id}', [VocabularyController::class, 'editTranslation']);
     Route::get('/random-eng', [VocabularyController::class, 'randomVocabulary']);
+    Route::post('/incrementKnow' ,[OurController::class, 'incrementKnow']);
+    Route::post('/incrementDontKnow' ,[OurController::class, 'incrementDontKnow']);
 });
 
 require __DIR__.'/auth.php';

@@ -45,10 +45,15 @@
                         @endphp
                         <div class="accordion accordion-flush" id="accordionFlushExample">
                                 @foreach($vocabularys as $vocabulary)
+                                        @php
+                                        $our = $vocabulary->our()->where('user_id','=',Auth::user()->id)->first();
+                                        @endphp
                                         <div class="accordion-item" id="accordion-item-{{$vocabulary->id}}">
                                             <h2 class="accordion-header" id="flush-headingOne{{$i}}">
                                                 <button class="accordion-button collapsed" type="button" id="header_vocalbulary_id{{$vocabulary->id}}" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{$i}}" aria-expanded="false" aria-controls="flush-collapseOne">
                                                 {{$vocabulary->vocabulary_name}}
+                                                {{$our === null ? 0: $our->know}}
+                                                : {{$our === null ? 0: $our->dont_know}}
                                                 </button>
                                             </h2>
                                             <div id="flush-collapseOne{{$i}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne{{$i}}" data-bs-parent="#accordionFlushExample">

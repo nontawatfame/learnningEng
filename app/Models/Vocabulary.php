@@ -13,4 +13,8 @@ class Vocabulary extends Model
     public function translation() {
         return $this->hasMany(Translation::class,'vocabulary_id','id');
     }
+
+    public function our() {
+        return $this->hasOne(Our::class, 'vocabulary_id', 'id');
+    }
 }

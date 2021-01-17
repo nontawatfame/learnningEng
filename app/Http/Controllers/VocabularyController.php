@@ -6,6 +6,7 @@ use App\Models\Translation;
 use App\Models\Vocabulary;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class VocabularyController extends Controller
@@ -34,6 +35,7 @@ class VocabularyController extends Controller
 
     public function dashboard() {
         $vocabulary = Vocabulary::orderByDesc('id')->get();
+        // dd($vocabulary[0]->our()->where('user_id','=',Auth::user()->id)->first());
         // $vocabulary = Vocabulary::inRandomOrder()->limit(5)->get();
         return view('dashboard',['vocabularys' => $vocabulary]);
     }

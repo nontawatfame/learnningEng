@@ -47,8 +47,10 @@
                                                     </div>
                                                     <p class="list-group-item-add list-group-item-action" onclick="openModalCreateList({{$vocabulary}})" ><i class="fas fa-plus" style="font-size: 15px;color:#696969"></i></p>
                                                     <div class="pb-4 mr-8 mt-3">
-                                                        <button class="btn btn-primary" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
-                                                        <button class="btn btn-danger" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button>
+                                                        {{-- <button class="btn btn-primary" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
+                                                        <button class="btn btn-danger" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button> --}}
+                                                        <button type="button" class="btn btn-success" onclick="incrementKnow(`{{$vocabulary->id}}`)">Know</button>
+                                                        <button type="button" class="btn btn-danger" onclick="incrementDontKnow(`{{$vocabulary->id}}`)">Don't know</button>
                                                     </div>
                                                 </div>
                                             </div>
