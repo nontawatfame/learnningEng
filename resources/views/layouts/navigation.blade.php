@@ -69,6 +69,9 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link href="/random-eng" :active="request()->is('random-eng')">
+                {{ __('Random-Eng') }}
+            </x-responsive-nav-link>
         </div>
 
 

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Random Eng') }}
         </h2>
     </x-slot>
     <div class="pt-5">
@@ -9,7 +9,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container">
-                            <x-button>Random vocabulary</x-button>
+                            <x-button onclick="randomEng()">Random vocabulary</x-button>
                     </div>
                 </div>
             </div>
@@ -26,10 +26,15 @@
                         @endphp
                         <div class="accordion accordion-flush" id="accordionFlushExample">
                                 @foreach($vocabularys as $vocabulary)
+                                        @php
+                                        $our = $vocabulary->our()->where('user_id','=',Auth::user()->id)->first();
+                                        @endphp
                                         <div class="accordion-item" id="accordion-item-{{$vocabulary->id}}">
                                             <h2 class="accordion-header" id="flush-headingOne{{$i}}">
                                                 <button class="accordion-button collapsed" type="button" id="header_vocalbulary_id{{$vocabulary->id}}" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{$i}}" aria-expanded="false" aria-controls="flush-collapseOne">
                                                 {{$vocabulary->vocabulary_name}}
+                                                <span class="bg-green-400 rounded-3xl w-8 ml-2 p-1 text-white font-sans font-bold shadow-sm text-center">{{$our === null ? 0: $our->know}}</span>
+                                                <span class="bg-red-400 rounded-3xl w-8 ml-1 p-1 text-white font-sans font-bold shadow-sm text-center">{{$our === null ? 0: $our->dont_know}}</span>
                                                 </button>
                                             </h2>
                                             <div id="flush-collapseOne{{$i}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne{{$i}}" data-bs-parent="#accordionFlushExample">
@@ -49,8 +54,8 @@
                                                     <div class="pb-4 mr-8 mt-3">
                                                         {{-- <button class="btn btn-primary" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
                                                         <button class="btn btn-danger" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button> --}}
-                                                        <button type="button" class="btn btn-success" onclick="incrementKnow(`{{$vocabulary->id}}`)">Know</button>
-                                                        <button type="button" class="btn btn-danger" onclick="incrementDontKnow(`{{$vocabulary->id}}`)">Don't know</button>
+                                                        <button type="button" class="btn bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300" onclick="incrementKnow(`{{$vocabulary->id}}`)">Know</button>
+                                                        <button type="button" class="btn bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300" onclick="incrementDontKnow(`{{$vocabulary->id}}`)">Don't know</button>
                                                     </div>
                                                 </div>
                                             </div>

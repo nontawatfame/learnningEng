@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout >
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
@@ -43,7 +43,7 @@
                         @php
                             $i = 1;
                         @endphp
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion accordion-flush font-mono" id="accordionFlushExample">
                                 @foreach($vocabularys as $vocabulary)
                                         @php
                                         $our = $vocabulary->our()->where('user_id','=',Auth::user()->id)->first();
@@ -52,8 +52,8 @@
                                             <h2 class="accordion-header" id="flush-headingOne{{$i}}">
                                                 <button class="accordion-button collapsed" type="button" id="header_vocalbulary_id{{$vocabulary->id}}" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{$i}}" aria-expanded="false" aria-controls="flush-collapseOne">
                                                 {{$vocabulary->vocabulary_name}}
-                                                {{$our === null ? 0: $our->know}}
-                                                : {{$our === null ? 0: $our->dont_know}}
+                                                <span class="bg-green-400 rounded-3xl w-8 ml-2 p-1 text-white font-sans font-bold shadow-sm text-center">{{$our === null ? 0: $our->know}}</span>
+                                                <span class="bg-red-400 rounded-3xl w-8 ml-1 p-1 text-white font-sans font-bold shadow-sm text-center">{{$our === null ? 0: $our->dont_know}}</span>
                                                 </button>
                                             </h2>
                                             <div id="flush-collapseOne{{$i}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne{{$i}}" data-bs-parent="#accordionFlushExample">

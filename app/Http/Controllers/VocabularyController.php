@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class VocabularyController extends Controller
 {
@@ -28,7 +29,7 @@ class VocabularyController extends Controller
             ->withInput();
         }
         Vocabulary::create([
-            'vocabulary_name' => $request->vocabulary_name,
+            'vocabulary_name' => Str::lower($request->vocabulary_name),
         ]);
         return redirect('/dashboard');
     }

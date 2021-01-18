@@ -25,7 +25,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-mono antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 

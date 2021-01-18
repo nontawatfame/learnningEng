@@ -273,3 +273,7 @@ function incrementDontKnow(id) {
         console.error('Error:', error);
       });
 }
+
+function randomEng() {
+    window.location.href = '/random-eng'
+}
