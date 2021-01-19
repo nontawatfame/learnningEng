@@ -35,9 +35,7 @@ class VocabularyController extends Controller
     }
 
     public function dashboard() {
-        $vocabulary = Vocabulary::orderByDesc('id')->get();
-        // dd($vocabulary[0]->our()->where('user_id','=',Auth::user()->id)->first());
-        // $vocabulary = Vocabulary::inRandomOrder()->limit(5)->get();
+        $vocabulary = Vocabulary::orderByDesc('id')->paginate(10);
         return view('dashboard',['vocabularys' => $vocabulary]);
     }
 

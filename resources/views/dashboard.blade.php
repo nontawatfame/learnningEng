@@ -28,7 +28,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container">
-                        <H1>All english vocabulary: <span class="all-eng">{{$vocabularys->count()}}</span></H1>
+                        <H1>All english vocabulary: <span class="all-eng">{{$vocabularys->total()}}</span></H1>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         @php
                             $i = 1;
                         @endphp
-                        <div class="accordion accordion-flush font-mono" id="accordionFlushExample">
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
                                 @foreach($vocabularys as $vocabulary)
                                         @php
                                         $our = $vocabulary->our()->where('user_id','=',Auth::user()->id)->first();
@@ -52,8 +52,8 @@
                                             <h2 class="accordion-header" id="flush-headingOne{{$i}}">
                                                 <button class="accordion-button collapsed" type="button" id="header_vocalbulary_id{{$vocabulary->id}}" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{$i}}" aria-expanded="false" aria-controls="flush-collapseOne">
                                                 {{$vocabulary->vocabulary_name}}
-                                                <span class="bg-green-400 rounded-3xl w-8 ml-2 p-1 text-white font-sans font-bold shadow-sm text-center">{{$our === null ? 0: $our->know}}</span>
-                                                <span class="bg-red-400 rounded-3xl w-8 ml-1 p-1 text-white font-sans font-bold shadow-sm text-center">{{$our === null ? 0: $our->dont_know}}</span>
+                                                <span class="bg-green-400 rounded-3xl w-8 ml-2 p-1 text-white  font-bold shadow-sm text-center">{{$our === null ? 0: $our->know}}</span>
+                                                <span class="bg-red-400 rounded-3xl w-8 ml-1 p-1 text-white  font-bold shadow-sm text-center">{{$our === null ? 0: $our->dont_know}}</span>
                                                 </button>
                                             </h2>
                                             <div id="flush-collapseOne{{$i}}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne{{$i}}" data-bs-parent="#accordionFlushExample">
@@ -71,8 +71,8 @@
                                                     </div>
                                                     <p class="list-group-item-add list-group-item-action" onclick="openModalCreateList({{$vocabulary}})" ><i class="fas fa-plus" style="font-size: 15px;color:#696969"></i></p>
                                                     <div class="pb-4 mr-8 mt-3">
-                                                        <button class="btn btn-primary" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
-                                                        <button class="btn btn-danger" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button>
+                                                        <button class="btn bg-blue-400 text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-full shadow-sm" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
+                                                        <button class="btn bg-red-400 text-white hover:bg-red-500 focus:outline-none focus:ring-4 focus:ring-red-300 rounded-full shadow-sm" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,6 +81,7 @@
                                         $i++;
                                     @endphp
                                 @endforeach
+                                {{$vocabularys->links()}}
                         </div>
                         <div class="modal fade" id="edit_vocabulary" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">

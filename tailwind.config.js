@@ -11,6 +11,7 @@ module.exports = {
         extend: {
             fontFamily: {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                kanit: ['Kanit']
             },
         },
     },
@@ -18,6 +19,8 @@ module.exports = {
     variants: {
         extend: {
             opacity: ['disabled'],
+            ringColor: ['hover', 'active', 'focus'],
+            backgroundColor: ['active'],
         },
     },
 
