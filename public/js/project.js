@@ -271,7 +271,7 @@ function incrementDontKnow(id) {
         })
         document.getElementById(`accordion-item-${res.vocabulary_id}`).remove()
         let length = document.getElementsByClassName('accordion-item').length
-        cdocument.getElementById('total_guess').innerText = `${(10-length)}/10`
+        document.getElementById('total_guess').innerText = `${(10-length)}/10`
     })
     .catch((error) => {
         console.error('Error:', error);
