@@ -9,7 +9,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container">
-                            <x-button onclick="randomEng()">Random vocabulary</x-button>
+                            <div class="flex justify-between">
+                                <x-button class="shadow-sm" onclick="randomEng()">Random vocabulary</x-button>
+                                <span id="total_guess" class="w-16 text-white text-2xl bg-indigo-500 text-center p-2 rounded-2xl shadow-sm">0/10</span>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -24,7 +27,7 @@
                         @php
                             $i = 1;
                         @endphp
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion accordion-flush" id="accordionFlushExample" onchange="console.log('ok')">
                                 @foreach($vocabularys as $vocabulary)
                                         @php
                                         $our = $vocabulary->our()->where('user_id','=',Auth::user()->id)->first();

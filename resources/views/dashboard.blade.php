@@ -28,7 +28,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container">
-                        <H1>All english vocabulary: <span class="all-eng">{{$vocabularys->total()}}</span></H1>
+                        <div class="flex flex-row space-x-4">
+                            <H1>All english vocabulary: <span class="all-eng">{{$vocabularys->total()}}</span></H1>
+                            <H1>Guess today: <span class="all-eng">{{$numGuessAll}}</span></H1>
+                        </div>
                     </div>
                 </div>
             </div>

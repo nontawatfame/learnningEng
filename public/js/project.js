@@ -241,6 +241,8 @@ function incrementKnow(id) {
             title: 'Know',
         })
         document.getElementById(`accordion-item-${res.vocabulary_id}`).remove()
+        let length = document.getElementsByClassName('accordion-item').length
+        document.getElementById('total_guess').innerText = `${(10-length)}/10`
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -268,6 +270,8 @@ function incrementDontKnow(id) {
             title: `Don't know`,
         })
         document.getElementById(`accordion-item-${res.vocabulary_id}`).remove()
+        let length = document.getElementsByClassName('accordion-item').length
+        cdocument.getElementById('total_guess').innerText = `${(10-length)}/10`
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -277,3 +281,5 @@ function incrementDontKnow(id) {
 function randomEng() {
     window.location.href = '/random-eng'
 }
+
+

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogGuess;
 use App\Models\Our;
 use Exception;
 use Illuminate\Http\Request;
@@ -22,6 +23,12 @@ class OurController extends Controller
             } else {
                 $our[0]->increment('know');
             }
+            $log = new LogGuess;
+            $log->user_id = Auth::user()->id;
+            $log->vocabulary_id = $request->id;
+            $log->know = 1;
+            $log->dont_know = 0;
+            $log->save();
             $json['success'] = 'success';
             $json['vocabulary_id'] = $request->id;
             return $json;
@@ -43,6 +50,12 @@ class OurController extends Controller
             } else {
                 $our[0]->increment('dont_know');
             }
+            $log = new LogGuess;
+            $log->user_id = Auth::user()->id;
+            $log->vocabulary_id = $request->id;
+            $log->know = 0;
+            $log->dont_know = 1;
+            $log->save();
             $json['success'] = 'success';
             $json['vocabulary_id'] = $request->id;
             return $json;

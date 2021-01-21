@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogGuess;
 use App\Models\Translation;
 use App\Models\Vocabulary;
 use Exception;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class VocabularyController extends Controller
 {
@@ -36,7 +38,13 @@ class VocabularyController extends Controller
 
     public function dashboard() {
         $vocabulary = Vocabulary::orderByDesc('id')->paginate(10);
-        return view('dashboard',['vocabularys' => $vocabulary]);
+        $datetime = Carbon::now()->isoFormat('YYYY-MM-DD');
+        $logGuess = LogGuess::where('created_at','like', $datetime."%")->get();
+        $numGuessAll = 0;
+        foreach ($logGuess as $log) {
+            $numGuessAll += $log->know + $log->dont_know;
+        }
+        return view('dashboard',['vocabularys' => $vocabulary, 'numGuessAll' => $numGuessAll]);
     }
 
     public function randomVocabulary() {
