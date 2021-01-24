@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LogGuess;
+use App\Models\SettingGuess;
 use App\Models\Translation;
 use App\Models\Vocabulary;
 use Exception;
@@ -11,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use App\Models\Our;
 
 class VocabularyController extends Controller
 {
@@ -48,8 +51,43 @@ class VocabularyController extends Controller
     }
 
     public function randomVocabulary() {
-        $vocabulary = Vocabulary::inRandomOrder()->limit(10)->get();
-        return view('random',['vocabularys' => $vocabulary]);
+        $setting = SettingGuess::where('user_id', '=', Auth::user()->id)->first();
+        if ($setting->operator === 'less') {
+            $operator = '<=';
+        } elseif ($setting->operator === 'more'){
+            $operator = '>=';
+        }
+        if ($setting === null) {
+            $setting = new SettingGuess();
+            $setting->user_id = Auth::user()->id;
+            $setting->operator = 'less';
+            $setting->value = '0';
+            $setting->type_guess = 'none';
+            $setting->save();
+        } else {
+            $vocabulary = Vocabulary::inRandomOrder()->limit(10)->get();
+        }
+        $vocabulary = Vocabulary::all();
+        $array = [];
+        foreach ($vocabulary as $voc) {
+            if ($voc->our === null) {
+               $our = new Our();
+               $our->vocabulary_id = $voc->id;
+               $our->user_id = Auth::user()->id;
+               $our->know = 0;
+               $our->dont_know = 0;
+               $our->save();
+               $our_v = Our::where('id','=', $our->id)->where('user_id','=',Auth::user()->id)->where($setting->type_guess , $operator ,$setting->value)->first();
+            } else {
+                $our_v = $voc->our()->where('user_id','=',Auth::user()->id)->where($setting->type_guess ,$operator ,$setting->value)->first();
+            }
+            if ($our_v !== null) {
+                array_push($array, $voc);
+            }
+        }
+        $items = Arr::random($array, 10);
+        // dd($array);
+        return view('random',['vocabularys' => $items, 'setting' => $setting]);
     }
 
     public function editVocabulary(Request $request) {
@@ -116,5 +154,23 @@ class VocabularyController extends Controller
         } catch (Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public function settingRondom(Request $request) {
+        $setting = SettingGuess::where('user_id', '=', Auth::user()->id)->first();
+        if ($setting === null) {
+            $setting = new SettingGuess();
+            $setting->user_id = Auth::user()->id;
+            $setting->operator = $request->operator;
+            $setting->value = $request->valueGuess;
+            $setting->type_guess = $request->typeGuess;
+            $setting->save();
+        } else {
+            $setting->operator = $request->operator;
+            $setting->value = ($request->valueGuess !== null) ? $request->valueGuess : "0";
+            $setting->type_guess = $request->typeGuess;
+            $setting->save();
+        }
+        return $setting;
     }
 }

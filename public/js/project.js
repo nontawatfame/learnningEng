@@ -279,7 +279,30 @@ function incrementDontKnow(id) {
 }
 
 function randomEng() {
-    window.location.href = '/random-eng'
+    let operator = document.getElementById('operator').getAttribute('data-type')
+    let valueGuess = document.getElementById('valueGuess').value
+    let typeGuess = document.getElementById('typeGuess').getAttribute('data-type')
+    console.log(operator, valueGuess, typeGuess)
+    fetch(`/random-eng/setting`,{
+        headers: {
+            "Content-Type": 'application/json',
+            "X-CSRF-Token": csrf
+        },
+        method: 'post',
+        body:
+        JSON.stringify({
+            'operator':operator,
+            'valueGuess':valueGuess,
+            'typeGuess':typeGuess,
+        })
+    })
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
 }
 
 function switchType(el) {
@@ -294,7 +317,7 @@ function switchType(el) {
     }
 }
 
-document.getElementById('typeGuess').addEventListener('keyup', (e) => {
+document.getElementById('valueGuess').addEventListener('keyup', (e) => {
     let inputStr = e.target.value.match(/\d/g)
     console.log(inputStr)
     if (inputStr !== null) {
@@ -308,3 +331,60 @@ document.getElementById('typeGuess').addEventListener('keyup', (e) => {
         e.target.value = ``
     }
 })
+
+function buttonIncrement() {
+    let el = document.getElementById('valueGuess')
+    if (el.value === '') {
+        el.value = 1
+    } else if (el.value >= 1) {
+        let value = parseInt(el.value)
+        value += 1
+        let valueInput = value
+        if (value > 99) {
+            valueInput = value - 1
+        }
+        el.value = valueInput
+    }
+}
+
+function buttonDecrement() {
+    let el = document.getElementById('valueGuess')
+    if (el.value === '') {
+        el.value = ''
+    } else if (el.value >= 1) {
+        let value = parseInt(el.value)
+        value -= 1
+        let valueInput = value
+        if (value < 1) {
+            valueInput = value + 1
+        }
+        el.value = valueInput
+    }
+}
+
+var color = {
+    'know': 'bg-green-400',
+    'dont_know': 'bg-red-400',
+    'none': 'bg-gray-400'
+}
+
+function switchTypeKnow(el) {
+    let type = el.getAttribute('data-type')
+    console.log(type)
+    if (type === 'know') {
+        el.setAttribute('data-type', 'dont_know')
+        el.innerHTML = `<div class="flex justify-between">Don't know <div class="pt-0.5"><i class="fas fa-angle-down"></i></div></div>`
+        el.classList.remove(color[type])
+        el.classList.add(color['dont_know'])
+    } else if (type === 'dont_know') {
+        el.setAttribute('data-type', 'none')
+        el.innerHTML = `<div class="flex justify-between">None <div class="pt-0.5"><i class="fas fa-angle-down"></i></div></div>`
+        el.classList.remove(color[type])
+        el.classList.add(color['none'])
+    } else if (type === 'none') {
+        el.setAttribute('data-type', 'know')
+        el.innerHTML = `<div class="flex justify-between">Know <div class="pt-0.5"><i class="fas fa-angle-down"></i></div></div>`
+        el.classList.remove(color[type])
+        el.classList.add(color['know'])
+    }
+}

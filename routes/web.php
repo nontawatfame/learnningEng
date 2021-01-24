@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/delete/translation/{id}', [VocabularyController::class, 'deleteTranslation']);
     Route::put('/edit_translation/{id}', [VocabularyController::class, 'editTranslation']);
     Route::get('/random-eng', [VocabularyController::class, 'randomVocabulary']);
+    Route::post('/random-eng/setting', [VocabularyController::class,'settingRondom']);
     Route::post('/incrementKnow' ,[OurController::class, 'incrementKnow']);
     Route::post('/incrementDontKnow' ,[OurController::class, 'incrementDontKnow']);
 });
