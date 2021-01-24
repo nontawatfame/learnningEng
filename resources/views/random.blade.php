@@ -10,8 +10,26 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="container">
                             <div class="flex justify-between">
-                                <x-button class="shadow-sm" onclick="randomEng()">Random vocabulary</x-button>
-                                <span id="total_guess" class="w-16 text-white text-2xl bg-indigo-500 text-center p-2 rounded-2xl shadow-sm">0/10</span>
+                                <div class="flex space-x-4 lgp:flex-col lgp:space-x-0 lgp:space-y-2">
+                                    <x-button class="shadow-sm" onclick="randomEng()">Random vocabulary</x-button>
+                                    <div class="flex">
+                                        <span class="my-auto bg-gray-400 p-1 rounded-l-lg text-white px-2 cursor-pointer select-none" onclick="switchType(this)" data-type="less">Less than <i class="fas fa-angle-down"></i></span>
+                                        <input type="text" id="typeGuess" maxlength="2" class="w-16 h-8 my-auto border-gray-200 rounded-none border-r-0 focus:ring-0 focus:border-gray-200" >
+                                        <div class="flex flex-col my-auto">
+                                            <button class="w-5 h-4 border-gray-200 border-solid border-1 text-gray-400 rounded-tr-lg leading-3 focus:outline-none active:bg-gray-200 active:text-gray-100">+</button>
+                                            <button class="w-5 h-4 border-gray-200 border-solid border-1 text-gray-400 rounded-br-lg leading-3 focus:outline-none active:bg-gray-200 active:text-gray-100">-</button>
+                                        </div>
+                                    </div>
+                                    <div class="flex">
+                                        <span class="my-auto bg-gray-400 p-1 rounded-l-lg text-white px-2">Over than</span>
+                                        <input type="text" class="w-16 h-8 my-auto border-gray-200 rounded-none border-r-0 focus:ring-0  focus:border-gray-200">
+                                        <div class="flex flex-col my-auto">
+                                            <button class="w-5 h-4 border-gray-200 border-solid border-1 text-gray-400 rounded-tr-lg leading-none focus:outline-none active:bg-gray-200 active:text-gray-100">+</button>
+                                            <button class="w-5 h-4 border-gray-200 border-solid border-1 text-gray-400 rounded-br-lg leading-none focus:outline-none active:bg-gray-200 active:text-gray-100">-</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span id="total_guess" class="w-16 text-white text-2xl bg-indigo-500 text-center p-2 rounded-2xl shadow-sm lgp:h-12">0/10</span>
                             </div>
                     </div>
                 </div>

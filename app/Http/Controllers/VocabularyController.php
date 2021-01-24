@@ -55,7 +55,7 @@ class VocabularyController extends Controller
     public function editVocabulary(Request $request) {
         try {
             $vocabulary = Vocabulary::find($request->id);
-            $vocabulary->vocabulary_name = $request->vocabulary_name;
+            $vocabulary->vocabulary_name = Str::lower($request->vocabulary_name);
             $vocabulary->save();
             return $vocabulary;
         } catch (Exception $e) {

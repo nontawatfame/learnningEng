@@ -14,6 +14,23 @@ module.exports = {
                 kanit: ['Kanit']
             },
         },
+        screens: {
+            'lgp': {'max': '767px'},
+            '2xl': '1535px',
+            // => @media (max-width: 1535px) { ... }
+
+            'xl': '1279px',
+            // => @media (max-width: 1279px) { ... }
+
+            'lg': '1023px',
+            // => @media (max-width: 1023px) { ... }
+
+            'md': '767px',
+            // => @media (max-width: 767px) { ... }
+
+            'sm': '639px',
+            // => @media (max-width: 639px) { ... }
+          }
     },
 
     variants: {
@@ -21,6 +38,9 @@ module.exports = {
             opacity: ['disabled'],
             ringColor: ['hover', 'active', 'focus'],
             backgroundColor: ['active'],
+            textColor: ['active'],
+            borderStyle: ['hover', 'focus'],
+            borderColor: ['active'],
         },
     },
 

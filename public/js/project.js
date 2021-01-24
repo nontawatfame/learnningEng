@@ -282,4 +282,29 @@ function randomEng() {
     window.location.href = '/random-eng'
 }
 
+function switchType(el) {
+    let type = el.getAttribute('data-type')
+    console.log(type)
+    if (type === 'less') {
+        el.setAttribute('data-type', 'more')
+        el.innerHTML = `More than <i class="fas fa-angle-down">`
+    }else if (type === 'more') {
+        el.setAttribute('data-type', 'less')
+        el.innerHTML = `Less than <i class="fas fa-angle-down">`
+    }
+}
 
+document.getElementById('typeGuess').addEventListener('keyup', (e) => {
+    let inputStr = e.target.value.match(/\d/g)
+    console.log(inputStr)
+    if (inputStr !== null) {
+        let value = '';
+        for (str of inputStr) {
+            value += `${str}`;
+        }
+        console.log(value)
+        e.target.value = value
+    } else if (inputStr === null) {
+        e.target.value = ``
+    }
+})
