@@ -16,12 +16,12 @@
                                         <span class="my-auto bg-gray-400 p-1 rounded-l-lg text-white px-2 cursor-pointer select-none" id="operator" onclick="switchType(this)" data-type="{{$setting->operator}}">Less than <i class="fas fa-angle-down"></i></span>
                                         <input type="text" id="valueGuess" maxlength="2" value="{{$setting->value}}" class="w-16 h-8 my-auto border-gray-200 rounded-none border-r-0 focus:ring-0 focus:border-gray-200" >
                                         <div class="flex flex-col my-auto">
-                                            <button onclick="buttonIncrement()" class="w-5 h-4 border-gray-200 border-solid border-1 text-gray-400 rounded-tr-lg leading-3 focus:outline-none active:bg-gray-200 active:text-gray-100">+</button>
-                                            <button onclick="buttonDecrement()" class="w-5 h-4 border-gray-200 border-solid border-1 text-gray-400 rounded-br-lg leading-3 focus:outline-none active:bg-gray-200 active:text-gray-100">-</button>
+                                            <button onclick="buttonIncrement()" id="buttonIncrement" class="w-5 h-4 border-gray-200 border-solid border-1 text-gray-400 rounded-tr-lg leading-3 focus:outline-none active:bg-gray-200 active:text-gray-100">+</button>
+                                            <button onclick="buttonDecrement()" id="buttonDecrement" class="w-5 h-4 border-gray-200 border-solid border-1 text-gray-400 rounded-br-lg leading-3 focus:outline-none active:bg-gray-200 active:text-gray-100">-</button>
                                         </div>
                                     </div>
                                     <div class="flex">
-                                        <span class="my-auto bg-green-400 p-1 rounded-lg text-white px-2 cursor-pointer select-none w-28" id="typeGuess" onclick="switchTypeKnow(this)" data-type="{{$setting->type_guess}}">
+                                        <span class="my-auto p-1 rounded-lg text-white px-2 cursor-pointer select-none w-28" id="typeGuess" onclick="switchTypeKnow(this)" data-type="{{$setting->type_guess}}">
                                             <div class="flex justify-between">Know <div class="pt-0.5"><i class="fas fa-angle-down"></i></div></div>
                                         </span>
                                     </div>
@@ -139,4 +139,5 @@
             </script>
         @endsection
     @endif
+    <script src="{{asset('js/random.js')}}"></script>
 </x-app-layout>

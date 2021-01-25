@@ -77,16 +77,28 @@ class VocabularyController extends Controller
                $our->know = 0;
                $our->dont_know = 0;
                $our->save();
-               $our_v = Our::where('id','=', $our->id)->where('user_id','=',Auth::user()->id)->where($setting->type_guess , $operator ,$setting->value)->first();
+               if ($setting->type_guess === 'none') {
+                    $our_v = Our::where('id','=', $our->id)->where('user_id','=',Auth::user()->id)->first();
+               } else {
+                    $our_v = Our::where('id','=', $our->id)->where('user_id','=',Auth::user()->id)->where($setting->type_guess , $operator ,$setting->value)->first();
+               }
             } else {
-                $our_v = $voc->our()->where('user_id','=',Auth::user()->id)->where($setting->type_guess ,$operator ,$setting->value)->first();
+                if ($setting->type_guess === 'none') {
+                    $our_v = $voc->our()->where('user_id','=',Auth::user()->id)->first();
+                } else {
+                    $our_v = $voc->our()->where('user_id','=',Auth::user()->id)->where($setting->type_guess ,$operator ,$setting->value)->first();
+                }
             }
             if ($our_v !== null) {
                 array_push($array, $voc);
             }
         }
-        $items = Arr::random($array, 10);
-        // dd($array);
+        if (count($array) >= 10) {
+            $items = Arr::random($array, 10);
+        } else {
+            $items = $array;
+        }
+
         return view('random',['vocabularys' => $items, 'setting' => $setting]);
     }
 

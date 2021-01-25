@@ -299,6 +299,7 @@ function randomEng() {
     .then(res => res.json())
     .then(res => {
         console.log(res)
+        window.location.href = '/random-eng'
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -370,21 +371,42 @@ var color = {
 
 function switchTypeKnow(el) {
     let type = el.getAttribute('data-type')
+    let valueGuess = document.getElementById('valueGuess')
+    let buttonIncrement = document.getElementById('buttonIncrement')
+    let buttonDecrement = document.getElementById('buttonDecrement')
     console.log(type)
     if (type === 'know') {
         el.setAttribute('data-type', 'dont_know')
         el.innerHTML = `<div class="flex justify-between">Don't know <div class="pt-0.5"><i class="fas fa-angle-down"></i></div></div>`
         el.classList.remove(color[type])
         el.classList.add(color['dont_know'])
+        valueGuess.classList.remove('bg-gray-200')
+        buttonIncrement.classList.remove('bg-gray-200')
+        buttonDecrement.classList.remove('bg-gray-200')
+        valueGuess.removeAttribute('disabled')
+        buttonIncrement.setAttribute('onclick','buttonIncrement()');
+        buttonDecrement.setAttribute('onclick','buttonDecrement()');
     } else if (type === 'dont_know') {
         el.setAttribute('data-type', 'none')
         el.innerHTML = `<div class="flex justify-between">None <div class="pt-0.5"><i class="fas fa-angle-down"></i></div></div>`
         el.classList.remove(color[type])
         el.classList.add(color['none'])
+        valueGuess.classList.add('bg-gray-200')
+        buttonIncrement.classList.add('bg-gray-200')
+        buttonDecrement.classList.add('bg-gray-200')
+        valueGuess.setAttribute('disabled','true')
+        buttonIncrement.setAttribute('onclick','');
+        buttonDecrement.setAttribute('onclick','');
     } else if (type === 'none') {
         el.setAttribute('data-type', 'know')
         el.innerHTML = `<div class="flex justify-between">Know <div class="pt-0.5"><i class="fas fa-angle-down"></i></div></div>`
         el.classList.remove(color[type])
         el.classList.add(color['know'])
+        valueGuess.classList.remove('bg-gray-200')
+        buttonIncrement.classList.remove('bg-gray-200')
+        buttonDecrement.classList.remove('bg-gray-200')
+        valueGuess.removeAttribute('disabled')
+        buttonIncrement.setAttribute('onclick','buttonIncrement()');
+        buttonDecrement.setAttribute('onclick','buttonDecrement()');
     }
 }
