@@ -86,11 +86,12 @@
                                                         @endif
                                                     </div>
                                                     <p class="list-group-item-add list-group-item-action" onclick="openModalCreateList({{$vocabulary}})" ><i class="fas fa-plus" style="font-size: 15px;color:#696969"></i></p>
-                                                    <div class="pb-4 mr-8 mt-3">
-                                                        {{-- <button class="btn btn-primary" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
-                                                        <button class="btn btn-danger" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button> --}}
-                                                        <button type="button" class="btn bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300" onclick="incrementKnow(`{{$vocabulary->id}}`)">Know</button>
-                                                        <button type="button" class="btn bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300" onclick="incrementDontKnow(`{{$vocabulary->id}}`)">Don't know</button>
+                                                    <div class="pb-4 mt-3 flex justify-between">
+                                                        <div>
+                                                            <button type="button" class="btn bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300" onclick="incrementKnow(`{{$vocabulary->id}}`)">Know</button>
+                                                            <button type="button" class="btn bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300" onclick="incrementDontKnow(`{{$vocabulary->id}}`)">Don't know</button>
+                                                        </div>
+                                                        <button type="button" class="btn bg-gray-100 text-blue-500 border-gray-200 border-2 hover:bg-gray-200 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-300 shadow-sm" onclick="translateLike(`{{$vocabulary->vocabulary_name}}`)">Translate</button>
                                                     </div>
                                                 </div>
                                             </div>

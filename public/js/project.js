@@ -401,3 +401,8 @@ function switchTypeKnow(el) {
         buttonDecrement.setAttribute('onclick','buttonDecrement()');
     }
 }
+
+function translateLike(name) {
+    console.log(name)
+    window.open(`https://dict.longdo.com/search/${name}`, '_blank');
+}
