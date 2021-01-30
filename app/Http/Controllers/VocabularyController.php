@@ -43,15 +43,27 @@ class VocabularyController extends Controller
         $vocabulary = Vocabulary::orderByDesc('id')->paginate(10);
         $datetime = Carbon::now()->isoFormat('YYYY-MM-DD');
         $logGuess = LogGuess::where('created_at','like', $datetime."%")->get();
+        $logGuessAll = LogGuess::all();
         $numGuessAll = 0;
+        $knowAll = 0;
+        $dontKnowAll = 0;
+        foreach ($logGuessAll as $guesss) {
+            $knowAll += $guesss->know;
+            $dontKnowAll += $guesss->dont_know;
+        }
         foreach ($logGuess as $log) {
             $numGuessAll += $log->know + $log->dont_know;
         }
-        return view('dashboard',['vocabularys' => $vocabulary, 'numGuessAll' => $numGuessAll]);
+        return view('dashboard',['vocabularys' => $vocabulary, 'numGuessAll' => $numGuessAll, 'guessAll' => $logGuessAll->count(), 'knowAll' => $knowAll, 'dontKnowAll' => $dontKnowAll]);
     }
 
     public function randomVocabulary() {
         $setting = SettingGuess::where('user_id', '=', Auth::user()->id)->first();
+        $datetime = Carbon::now()->isoFormat('YYYY-MM-DD');
+        $logGuess = LogGuess::where('created_at','like', $datetime."%")->get();
+        $numGuessAll = 0;
+        $knowAll = 0;
+        $dontKnowAll = 0;
         if ($setting->operator === 'less') {
             $operator = '<=';
         } elseif ($setting->operator === 'more'){
@@ -98,8 +110,13 @@ class VocabularyController extends Controller
         } else {
             $items = $array;
         }
+        foreach ($logGuess as $log) {
+            $numGuessAll += $log->know + $log->dont_know;
+            $knowAll += $log->know;
+            $dontKnowAll += $log->dont_know;
+        }
 
-        return view('random',['vocabularys' => $items, 'setting' => $setting]);
+        return view('random',['vocabularys' => $items, 'setting' => $setting ,'numAll' => $numGuessAll, 'knowAll' => $knowAll, 'dontKnowAll' => $dontKnowAll]);
     }
 
     public function editVocabulary(Request $request) {

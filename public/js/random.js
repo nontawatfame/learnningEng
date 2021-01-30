@@ -50,4 +50,17 @@ if (typeGuess === 'know') {
     decrement.setAttribute('onclick','');
 }
 
-
+document.getElementById('valueGuess').addEventListener('keyup', (e) => {
+    let inputStr = e.target.value.match(/\d/g)
+    console.log(inputStr)
+    if (inputStr !== null) {
+        let value = '';
+        for (str of inputStr) {
+            value += `${str}`;
+        }
+        console.log(value)
+        e.target.value = value
+    } else if (inputStr === null) {
+        e.target.value = ``
+    }
+})

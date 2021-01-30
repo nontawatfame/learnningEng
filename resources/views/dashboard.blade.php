@@ -24,16 +24,26 @@
     </div>
 
     <div class="pt-4">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="container">
-                        <div class="flex flex-row space-x-4">
-                            <H1>All english vocabulary: <span class="all-eng">{{$vocabularys->total()}}</span></H1>
-                            <H1>Guess today: <span class="all-eng">{{$numGuessAll}}</span></H1>
-                        </div>
-                    </div>
-                </div>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-row space-x-1.5">
+            <div class="bg-white p-6 overflow-hidden shadow-sm rounded-xl flex flex-col text-center">
+                <p class="text-white text-2xl bg-indigo-400 p-2 rounded-xl">{{$vocabularys->total()}}</p>
+                <p class="text-blue-700 text-base">All vocabulary</p>
+            </div>
+            <div class="bg-white p-6 overflow-hidden shadow-sm rounded-xl flex flex-col text-center">
+                <p class="text-white text-2xl bg-pink-400 p-2 rounded-xl">{{$guessAll}}</p>
+                <p class="text-pink-700 text-base">Guess all</p>
+            </div>
+            <div class="bg-white p-6 overflow-hidden shadow-sm rounded-xl flex flex-col text-center">
+                <p class="text-white text-2xl bg-green-400 p-2 rounded-xl">{{$knowAll}}</p>
+                <p class="text-green-700 text-base">Guess know all</p>
+            </div>
+            <div class="bg-white p-6 overflow-hidden shadow-sm rounded-xl flex flex-col text-center">
+                <p class="text-white text-2xl bg-red-400 p-2 rounded-xl">{{$dontKnowAll}}</p>
+                <p class="text-red-700 text-base">Guess don't know all</p>
+            </div>
+            <div class="bg-white p-6 overflow-hidden shadow-sm rounded-xl flex flex-col text-center">
+                <p class="text-white text-2xl bg-yellow-400 p-2 rounded-xl">{{$numGuessAll}}</p>
+                <p class="text-yellow-700 text-base">Guess day now</p>
             </div>
         </div>
     </div>

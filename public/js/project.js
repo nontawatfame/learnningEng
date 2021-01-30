@@ -243,6 +243,9 @@ function incrementKnow(id) {
         document.getElementById(`accordion-item-${res.vocabulary_id}`).remove()
         let length = document.getElementsByClassName('accordion-item').length
         document.getElementById('total_guess').innerText = `${(10-length)}/10`
+        document.getElementById('numAll').innerHTML = ``+res.numAll
+        document.getElementById('knowAll').innerHTML = ``+res.knowAll
+        document.getElementById('dontKnowAll').innerHTML = ``+res.dontKnowAll
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -272,6 +275,9 @@ function incrementDontKnow(id) {
         document.getElementById(`accordion-item-${res.vocabulary_id}`).remove()
         let length = document.getElementsByClassName('accordion-item').length
         document.getElementById('total_guess').innerText = `${(10-length)}/10`
+        document.getElementById('numAll').innerHTML = ``+res.numAll
+        document.getElementById('knowAll').innerHTML = ``+res.knowAll
+        document.getElementById('dontKnowAll').innerHTML = ``+res.dontKnowAll
     })
     .catch((error) => {
         console.error('Error:', error);
@@ -317,21 +323,6 @@ function switchType(el) {
         el.innerHTML = `Less than <i class="fas fa-angle-down">`
     }
 }
-
-document.getElementById('valueGuess').addEventListener('keyup', (e) => {
-    let inputStr = e.target.value.match(/\d/g)
-    console.log(inputStr)
-    if (inputStr !== null) {
-        let value = '';
-        for (str of inputStr) {
-            value += `${str}`;
-        }
-        console.log(value)
-        e.target.value = value
-    } else if (inputStr === null) {
-        e.target.value = ``
-    }
-})
 
 function buttonIncrement() {
     let el = document.getElementById('valueGuess')

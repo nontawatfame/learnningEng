@@ -7,6 +7,7 @@ use App\Models\Our;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class OurController extends Controller
 {
@@ -29,8 +30,21 @@ class OurController extends Controller
             $log->know = 1;
             $log->dont_know = 0;
             $log->save();
+            $datetime = Carbon::now()->isoFormat('YYYY-MM-DD');
+            $logGuess = LogGuess::where('created_at','like', $datetime."%")->get();
+            $numGuessAll = 0;
+            $knowAll = 0;
+            $dontKnowAll = 0;
+            foreach ($logGuess as $log) {
+                $numGuessAll += $log->know + $log->dont_know;
+                $knowAll += $log->know;
+                $dontKnowAll += $log->dont_know;
+            }
             $json['success'] = 'success';
             $json['vocabulary_id'] = $request->id;
+            $json['numAll'] = $numGuessAll;
+            $json['knowAll'] = $knowAll;
+            $json['dontKnowAll'] = $dontKnowAll;
             return $json;
         } catch (Exception $e) {
             return $e->getMessage();
@@ -56,8 +70,21 @@ class OurController extends Controller
             $log->know = 0;
             $log->dont_know = 1;
             $log->save();
+            $datetime = Carbon::now()->isoFormat('YYYY-MM-DD');
+            $logGuess = LogGuess::where('created_at','like', $datetime."%")->get();
+            $numGuessAll = 0;
+            $knowAll = 0;
+            $dontKnowAll = 0;
+            foreach ($logGuess as $log) {
+                $numGuessAll += $log->know + $log->dont_know;
+                $knowAll += $log->know;
+                $dontKnowAll += $log->dont_know;
+            }
             $json['success'] = 'success';
             $json['vocabulary_id'] = $request->id;
+            $json['numAll'] = $numGuessAll;
+            $json['knowAll'] = $knowAll;
+            $json['dontKnowAll'] = $dontKnowAll;
             return $json;
         } catch (Exception $e) {
             return $e->getMessage();

@@ -35,6 +35,23 @@
     </div>
 
     <div class="pt-4">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-row space-x-1.5">
+            <div class="bg-white p-6 overflow-hidden shadow-sm rounded-xl flex flex-col text-center">
+                <p class="text-white text-2xl bg-yellow-400 p-2 rounded-xl" id="numAll">{{$numAll}}</p>
+                <p class="text-yellow-700 text-base">Guess all day now</p>
+            </div>
+            <div class="bg-white p-6 overflow-hidden shadow-sm rounded-xl flex flex-col text-center">
+                <p class="text-white text-2xl bg-green-400 p-2 rounded-xl" id="knowAll">{{$knowAll}}</p>
+                <p class="text-green-700 text-base">Guess know day now</p>
+            </div>
+            <div class="bg-white p-6 overflow-hidden shadow-sm rounded-xl flex flex-col text-center">
+                <p class="text-white text-2xl bg-red-400 p-2 rounded-xl" id="dontKnowAll">{{$dontKnowAll}}</p>
+                <p class="text-red-700 text-base">Guess don't know day now</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pt-4">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mb-5">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
