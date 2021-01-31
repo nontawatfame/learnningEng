@@ -91,7 +91,10 @@
                                                             <button type="button" class="btn bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300" onclick="incrementKnow(`{{$vocabulary->id}}`)">Know</button>
                                                             <button type="button" class="btn bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300" onclick="incrementDontKnow(`{{$vocabulary->id}}`)">Don't know</button>
                                                         </div>
-                                                        <button type="button" class="btn bg-gray-100 text-blue-500 border-gray-200 border-2 hover:bg-gray-200 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-300 shadow-sm" onclick="translateLike(`{{$vocabulary->vocabulary_name}}`)">Translate</button>
+                                                        <div>
+                                                            <button type="button" class="btn bg-gray-100 text-blue-500 border-gray-200 border-2 hover:bg-gray-200 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-300 shadow-sm" onclick="translateLike(`{{$vocabulary->vocabulary_name}}`)"><i class="fas fa-language text-2xl"></i></button>
+                                                            <button type="button" class="btn bg-gray-100 text-blue-500 border-gray-200 border-2 hover:bg-gray-200 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-300 shadow-sm" onclick="translateLikeGoogle(`{{$vocabulary->vocabulary_name}}`)"><i class="fab fa-google text-2xl"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

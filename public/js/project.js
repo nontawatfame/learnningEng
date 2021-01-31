@@ -406,3 +406,7 @@ function translateLike(name) {
     console.log(name)
     window.open(`https://dict.longdo.com/search/${name}`, '_blank');
 }
+
+function translateLikeGoogle(name) {
+    window.open(`https://translate.google.com/?sl=en&tl=th&text=${name}&op=translate&hl=th`, '_blank');
+}
