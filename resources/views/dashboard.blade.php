@@ -83,10 +83,17 @@
                                                         @endif
                                                     </div>
                                                     <p class="list-group-item-add list-group-item-action" onclick="openModalCreateList({{$vocabulary}})" ><i class="fas fa-plus" style="font-size: 15px;color:#696969"></i></p>
-                                                    <div class="pb-4 mr-8 mt-3">
-                                                        <button class="btn bg-blue-400 text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-full shadow-sm" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
-                                                        <button class="btn bg-red-400 text-white hover:bg-red-500 focus:outline-none focus:ring-4 focus:ring-red-300 rounded-full shadow-sm" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button>
+                                                    <div class="pb-4 mt-3 flex justify-between">
+                                                        <div>
+                                                            <button class="btn bg-blue-400 text-white hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-full shadow-sm" onclick="modalEditVocabulary({{$vocabulary->id}},{{$vocabulary}})"><i class="far fa-edit mr-1"></i> edit</button>
+                                                            <button class="btn bg-red-400 text-white hover:bg-red-500 focus:outline-none focus:ring-4 focus:ring-red-300 rounded-full shadow-sm" onclick="deleteVocabulary({{$vocabulary}})"><i class="far fa-trash-alt"></i> delete</button>
+                                                        </div>
+                                                        <div>
+                                                            <button type="button" class="btn bg-gray-100 text-blue-500 border-gray-200 border-2 hover:bg-gray-200 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-300 shadow-sm" onclick="translateLike(`{{$vocabulary->vocabulary_name}}`)"><i class="fas fa-language text-2xl"></i></button>
+                                                            <button type="button" class="btn bg-gray-100 text-blue-500 border-gray-200 border-2 hover:bg-gray-200 hover:text-blue-700 focus:outline-none focus:ring-4 focus:ring-gray-300 shadow-sm" onclick="translateLikeGoogle(`{{$vocabulary->vocabulary_name}}`)"><i class="fab fa-google text-2xl"></i></button>
+                                                        </div>
                                                     </div>
+
                                                 </div>
                                             </div>
                                         </div>
