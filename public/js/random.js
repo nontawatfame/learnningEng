@@ -65,3 +65,33 @@ document.getElementById('valueGuess').addEventListener('keyup', (e) => {
     }
 })
 
+function buttonIncrementNumber() {
+    let el = document.getElementById('valueGuessNumber')
+    if (el.value === '' || el.value === '0') {
+        el.value = 1
+    } else if (el.value >= 1) {
+        let value = parseInt(el.value)
+        value += 1
+        let valueInput = value
+        if (value > 99) {
+            valueInput = value - 1
+        }
+        el.value = valueInput
+    }
+}
+
+function buttonDecrementNumber() {
+    let el = document.getElementById('valueGuessNumber')
+    if (el.value === '') {
+        el.value = ''
+    } else if (el.value >= 1) {
+        let value = parseInt(el.value)
+        value -= 1
+        let valueInput = value
+        if (value < 1) {
+            valueInput = value + 1
+        }
+        el.value = valueInput
+    }
+}
+

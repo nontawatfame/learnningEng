@@ -57,7 +57,6 @@ function submitEditVocabulary() {
 }
 
 function deleteVocabulary(vocabulary) {
-    console.log(vocabulary)
     modalDeleteVocabulary.show()
     document.getElementById('body_delete_vocabulary').innerText = `Want to delete the ${vocabulary.vocabulary_name}?`
     document.getElementById('delete_vocabulary_btn').setAttribute('onclick',`deleteVocabularyId(${vocabulary.id})`)
@@ -326,7 +325,7 @@ function switchType(el) {
 
 function buttonIncrement() {
     let el = document.getElementById('valueGuess')
-    if (el.value === '') {
+    if (el.value === '' || el.value === '0') {
         el.value = 1
     } else if (el.value >= 1) {
         let value = parseInt(el.value)
