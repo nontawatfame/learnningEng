@@ -58,7 +58,7 @@
                     {{ __('Login') }}
                 </x-button>
                 <x-register-btn>
-                    register
+                    2222222222222register2222222222222
                 </x-register-btn>
             </div>
         </form>
