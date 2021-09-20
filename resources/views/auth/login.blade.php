@@ -51,15 +51,9 @@
                     {{ __('Login') }}
                 </x-button>
                 <x-register-btn>
-                    register
+                    111register111111111111
                 </x-register-btn>
 
-                <x-button class="ml-3">
-                    {{ __('Login') }}
-                </x-button>
-                <x-register-btn>
-                    2222222222222register2222222222222
-                </x-register-btn>
             </div>
         </form>
     </x-auth-card>
