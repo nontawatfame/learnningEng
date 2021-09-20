@@ -53,6 +53,13 @@
                 <x-register-btn>
                     register
                 </x-register-btn>
+
+                <x-button class="ml-3">
+                    {{ __('Login') }}
+                </x-button>
+                <x-register-btn>
+                    register
+                </x-register-btn>
             </div>
         </form>
     </x-auth-card>
